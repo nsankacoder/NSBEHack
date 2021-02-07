@@ -20,7 +20,8 @@ while True:
     if initial.lower() in ['task','t']:
         taskName = input('Please insert task name')
         class Task:
-            def __init__ (self, timeLeft, taskImp, taskSize):
+            def __init__ (self, name, timeLeft, taskImp, taskSize):
+                self.name = taskName
                 self.timeLeft = timeLeft
                 self.taskImp = taskImp
                 self.taskSize = taskSize
@@ -34,13 +35,16 @@ while True:
         import datetime
         from datetime import date
 
-        def timeLeft(today, subd):
+        def numOfDays(today, subd):
             return (subd-today)
         try:
             today = datetime.date.today()
             subds = input('Please insert the date of the last day in the format (yyyy-mm-dd):')
-            subd = datetime.datetime.strptime(subds,"%Y-%m-%d").date()
-            print((timeLeft(today, subd)), ' left until the submission date of ', taskName)
+            subd = datetime.datetime.strptime(subds,"%Y-%m-%d %H:%m").date()
+            result = numOfDays(today, subd)
+            timeLeft = int(strip(result))
+
+            print(numOfDays(today, subd), ' left until the submission date of ', taskName)
 
         except:
             print('Invalid input.')
@@ -63,10 +67,12 @@ while True:
             print('This task is must-do!')
         
         #TASK SIZE-----------------------------------------------------------------------------------------------------------
+        taskSizes = input ('How much time does this task take to complete? Please enter the number of hours expected to finish this task: ')
+        taskSize = float(taskSizes)
 
-
+        #Urgency and placing------------------------------------------------------------------------------------------------
         s = Task.urgency(timeLeft,taskSize,taskImp)
-        print(s)
+        print(taskName, 'has an Importance Level of: ', s)
 
     #EVENT------------------------------------------------
     elif initial.lower() in ['event','e']:
