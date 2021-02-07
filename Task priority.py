@@ -115,13 +115,16 @@ while True:
         
         #Days until submission----------------------------------------------------------------------------------------------
         import datetime
-        from datetime import date
+        from datetime import date, datetime
+        def numOfDays(today, subd):
+            return (subd-today)
 
-        today = datetime.date.today()
-        subds = input('Please insert the date of the event in the format (yyyy-mm-dd):')
-        subd = datetime.datetime.strptime(subds,"%Y-%m-%d").date()
-        numOfDays = subd - today
-        print(numOfDays, ' left until ', eventName)
+        now = datetime.now()
+        todays = now.strftime("%Y-%m-%d, %H:%M")
+        today = datetime.strptime(todays,"%Y-%m-%d, %H:%M")
+        subds = input('Please insert the date and the time of the event in the format (yyyy-mm-dd, HH:MM):')
+        subd = datetime.strptime(subds,"%Y-%m-%d, %H:%M")
+        print(numOfDays(today, subd), ' left until ', eventName)
 
     else:
        print ('Invalid input.')
@@ -138,6 +141,5 @@ while True:
     else:
        print ('Invalid input.')
        break
-
 #------------------------------------------------------------------------------------------------------------
 
