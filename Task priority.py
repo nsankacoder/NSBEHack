@@ -33,18 +33,17 @@ while True:
 
         #Days until submission----------------------------------------------------------------------------------------------
         import datetime
-        from datetime import date
+        from datetime import date, datetime
 
         def numOfDays(today, subd):
             return (subd-today)
         try:
-            today = datetime.date.today()
-            subds = input('Please insert the date of the last day in the format (yyyy-mm-dd):')
-            subd = datetime.datetime.strptime(subds,"%Y-%m-%d %H:%m").date()
-            result = numOfDays(today, subd)
-            timeLeft = int(strip(result))
-
-            print(numOfDays(today, subd), ' left until the submission date of ', taskName)
+            now = datetime.now()
+            todays = now.strftime("%Y-%m-%d, %H:%M")
+            today = datetime.strptime(todays,"%Y-%m-%d, %H:%M")
+            subds = input('Please insert the date and the time of the submission in the format (yyyy-mm-dd, HH:MM):')
+            subd = datetime.strptime(subds,"%Y-%m-%d, %H:%M")
+            print((numOfDays(today, subd)), ' left until the submission date of ', taskName)
 
         except:
             print('Invalid input.')
