@@ -43,7 +43,43 @@ while True:
             today = datetime.strptime(todays,"%Y-%m-%d, %H:%M")
             subds = input('Please insert the date and the time of the submission in the format (yyyy-mm-dd, HH:MM):')
             subd = datetime.strptime(subds,"%Y-%m-%d, %H:%M")
-            print((numOfDays(today, subd)), ' left until the submission date of ', taskName)
+            print(numOfDays(today, subd), ' left until the submission date of ', taskName)
+
+            string = str(numOfDays(today, subd))
+            
+            days = 0
+            hour = 0
+            minutes = 0
+            try:
+                #IF more than 0 days---------------------------------------------------------------------------------------
+                findd = string.index('d')
+                finddi = int(findd)
+                fdi = finddi - 1
+                days = int(string[0:fdi])
+    
+                findcoma = string.index(',')
+                findcomai = int(findcoma)
+                findcol = string.index(':')
+                findcoli = int(findcol)
+                fh = findcoli - 2
+                hour = int(string[fh:findcoli])
+
+            except:
+                #IF 0 days-----------------------------------------------------------------------------------------------
+                test3 = string[1]
+                test2 = string[2]
+
+                if test3 or test2 in [':']:
+                    days = 0
+                    if test3 in [':']:
+                        hour = int(string[0])
+                        minutes = int(string[2:4])
+                    if test2 in [':']:
+                        hour = int(string[0:2])
+                        minutes = int(string[3:5])
+
+            hours = hour + (minutes/60)
+            timeLeft = (days*24) + hours
 
         except:
             print('Invalid input.')
@@ -102,10 +138,6 @@ while True:
     else:
        print ('Invalid input.')
        break
-    
-
-
-
 
 #------------------------------------------------------------------------------------------------------------
 
